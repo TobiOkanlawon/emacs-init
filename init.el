@@ -72,3 +72,9 @@
   kept-new-versions 20   ; how many of the newest versions to keep
   kept-old-versions 5    ; and how many of the old
 )
+
+;; configure org-mode
+(require 'org)
+(define-key global-map "\C-csl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
