@@ -30,7 +30,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(helm-dash emmet-mode dracula-theme)))
+ '(package-selected-packages '(elpher rjsx-mode helm-dash emmet-mode dracula-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -82,3 +82,22 @@
 
 ;; enable the time in mode-line
 (display-time-mode 1)
+(require 'helm)
+
+;; make jsx-mode the default for opening JS files
+(add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
+
+;; adding org-timer to org-mode
+(add-to-list 'org-modules 'org-timer)
+(setq org-timer-default-timer 25)
+
+;;Modify the org-clock-in so that a timer is started with the default
+;; value except if a timer is already started
+(add-hook 'org-clock-in-hook (lambda ()
+      (if (not org-timer-current-timer)
+      (org-timer-set-timer '(16)))))
+
+;; Enable IDO mode everywhere
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
