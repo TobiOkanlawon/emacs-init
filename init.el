@@ -42,7 +42,7 @@
 (load-theme 'dracula t)
 
 ;; beancount mode for plaintext bookkeeping.
-(add-to-list 'load-path "~/Downloads/beancount-mode/")
+(add-to-list 'load-path "~/.emacs.d/beancount-mode/")
 (require 'beancount)
 (add-to-list 'auto-mode-alist '("\\.beancount\\'" . beancount-mode))
 
