@@ -30,7 +30,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(elpher rjsx-mode helm-dash emmet-mode dracula-theme)))
+ '(package-selected-packages
+   '(which-key elpher rjsx-mode helm-dash emmet-mode dracula-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -101,3 +102,30 @@
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (ido-mode 1)
+
+;; change prefix key for lsp-mode keybindings
+;; (setq lsp-keymap-prefix "C-c l")
+(define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
+
+(with-eval-after-load 'lsp-mode
+  (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
+  )
+
+
+(require 'lsp-mode)
+(add-hook 'rjsx-mode #'lsp-deferred)
+
+;; Performance adjustments for lsp-mode
+
+;; adjust gc-cons-threshold for performance reasons
+(setq gc-cons-threshold 100000000)
+
+;; increase the amount of data which emacs reads from the process
+(setq read-process-output-max (* 1024 1024)) ;; 1 megabyte
+
+(setq lsp-idle-delay 0.500)
+(setq lsp-log-io nil) 
+
+;; LSP-mode usage settings
+(setq lsp-modeline-diagnostics-enable t)
+(setq lsp-modeline-code-actions-segments '(count icon name))
